@@ -6,35 +6,36 @@ let dia = parseInt(prompt("Ingrese un numero del 1-7"))
 
 switch (dia) {
     case 1:
-        document.write("Dia Lunes");
-        console.log("Dia Lunes");
+        windows.alert("Dia Lunes");
+        log("Dia Lunes");
         break;
     case 2:
-        document.write("Dia Martes");
         console.log("Dia Martes");
+        alert("Dia Martes");
         break;
     case 3:
-        document.write("Dia Miercoles");
         console.log("Dia Miercoles");
+        alert("Dia Miercoles");
         break;
     case 4:
-        document.write("Dia Jueves");
         console.log("Dia Jueves");
+        alert("Dia Jueves");
         break;
     case 5:
-        document.write("Dia Viernes");
         console.log("Dia Viernes");
+        alert("Dia Viernes");
         break;
     case 6:
-        document.write("Dia Sabado");
         console.log("Dia Sabado");
+        alert("Dia Sabado");
         break;
     case 7:
-        document.write("Dia Domingo");
         console.log("Dia Domingo");
+        alert("Dia Domingo");
         break;
     default:
         console.log("El Numero que ingreso no es valido para un dia de la semana");
-        document.write("El Numero que ingreso no es valido para un dia de la semana");
+        alert("El Numero que ingreso no es valido para un dia de la semana");
         break;
 }
+
