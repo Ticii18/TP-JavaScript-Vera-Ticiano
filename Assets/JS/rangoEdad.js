@@ -16,6 +16,5 @@ if (edad>0 && edad<=12){
     console.log("Su rango de edad es: Adulto mayor ");
     alert("Su rango de edad es: Adulto mayor ")  
 } else{
-    console.log("Porfavor ingrese una edad valida")
     alert("Porfavor ingrese una edad valida menores a (117 Edad de la persona mas vieja del mundo) ")
 }
