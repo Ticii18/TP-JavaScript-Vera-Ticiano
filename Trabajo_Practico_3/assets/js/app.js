@@ -25,15 +25,16 @@ function listarTareas() {
 
 // editar una tarea
 
-function editarTarea(nombreActual, nuevoNombre) {
-    const indice = tareas.indexOf(nombreActual);
-    if (indice !== -1) { // veo si el indice que ingreso el usuario esta en la lista para editarlo
+function editarTarea(nombre, nuevoNombre) {
+    const indice = tareas.indexOf(nombre);
+    if (indice !== -1) {
         tareas[indice] = nuevoNombre;
         alert("Tarea editada correctamente.");
     } else {
         alert("La tarea especificada no se encontró en la lista.");
     }
 }
+
 
 
 
@@ -47,7 +48,7 @@ function eliminarTarea(nombre) {
     }
 }
 let tareas = [];
-
+const regex = /^\S+$/;
 let opcion = prompt("1. Agregar tarea\n2. Mostrar lista\n3. Editar tarea\n4. Eliminar tarea\n0. Terminar con el bucle");
 
 while (opcion !== "0") {
@@ -57,7 +58,7 @@ while (opcion !== "0") {
         switch (parseInt(opcion)) {
             case 1:
                 nombre = prompt("Ingrese el nombre de la tarea");
-                if (nombre.trim() !== "" && !isNaN(nombre)) {
+                if (regex.test(nombre) && isNaN(nombre)) {
                     agregarTareas(nombre);
                 } else {
                     alert("El nombre de la tarea no puede estar vacío ni ser un número");
@@ -70,27 +71,30 @@ while (opcion !== "0") {
                     alert("No hay tareas para mostrar.");
                 }
                 break;
-            case 3:
-                if (tareas.length > 0) {
-                    indice = parseInt(prompt("Ingrese el índice de la tarea a editar"));
-                    if (!isNaN(indice) && indice >= 0 && indice < tareas.length) {
-                        nombre = prompt("Ingrese el nuevo nombre de la tarea");
-                        if (nombre.trim() !== "" && !isNaN(nombre)) {
-                            editarTarea(tareas[indice], nombre);
+                case 3:
+                    if (tareas.length > 0) {
+                        nombre = prompt("Ingrese el nombre de la tarea que desea editar");
+                        const indice = tareas.indexOf(nombre);
+                        if (indice !== -1) {
+                            nuevoNombre = prompt("Ingrese el nuevo nombre de la tarea");
+                            if (nuevoNombre.trim() !== "") {
+                                editarTarea(nombre, nuevoNombre);
+                            } else {
+                                alert("El nuevo nombre de la tarea no puede estar vacío");
+                            }
                         } else {
-                            alert("El nombre de la tarea no puede estar vacío ni ser un número");
+                            alert("La tarea especificada no se encontró en la lista.");
                         }
                     } else {
-                        alert("Índice de tarea inválido");
+                        alert("No hay tareas para editar.");
                     }
-                } else {
-                    alert("No hay tareas para editar.");
-                }
-                break;
+                    break;
+                
+                
             case 4:
                 if (tareas.length > 0) {
                     nombre = prompt("Ingrese el nombre exacto de la tarea a eliminar");
-                    if (nombre.trim() !== "" && !isNaN(nombre)) {
+                    if (nombre.trim() !== "" && regex.test(nombre) && isNaN(nombre)) {
                         eliminarTarea(nombre);
                     } else {
                         alert("El nombre de la tarea no puede estar vacío ni ser un número");
