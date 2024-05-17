@@ -15,50 +15,94 @@ function agregarTareas(nombre) {
 }
 
 // mostrar el listado de las tareas una alado de otras como funcion
-
 function listarTareas() {
+    let mensaje = "";
     for (let i = 0; i < tareas.length; i++) {
-        console.log(tareas[i]);
+        mensaje += tareas[i] + "\n";
+    }
+    alert(mensaje);
+}
+
+// editar una tarea
+
+function editarTarea(nombreActual, nuevoNombre) {
+    const indice = tareas.indexOf(nombreActual);
+    if (indice !== -1) { // veo si el indice que ingreso el usuario esta en la lista para editarlo
+        tareas[indice] = nuevoNombre;
+        alert("Tarea editada correctamente.");
+    } else {
+        alert("La tarea especificada no se encontró en la lista.");
     }
 }
 
 
-function editarTarea(index, nombre) {
-    tareas[index] = nombre;
-}
 
-function eliminarTarea(index) {
-    tareas.splice("index", 1);
+function eliminarTarea(nombre) {
+    const indice = tareas.indexOf(nombre);
+    if (indice !== -1) {
+        tareas.splice(indice, 1);
+        alert("Tarea eliminada correctamente.");
+    } else {
+        alert("La tarea especificada no se encontró en la lista.");
+    }
 }
-
 let tareas = [];
 
-//solicitar al usuario que ingrese unas de las opciones, utilizando un bucle y si ingresa 0 termine
-let opcion = parseInt(prompt("1. Agregar tarea\n 2.Mostrar lista \n 3. Editar tarea \n 4. Eliminar tarea \n 0. Terminar con el bucle"));
-while (opcion!= 0) {
-    
-    switch (opcion) {
-        case 1:
-            nombre = prompt("Ingrese el nombre de la tarea");
-            agregarTareas(nombre);
-            break;
-        case 2:
-            listarTareas();
-            break;
-        case 3:
-            index = parseInt(prompt("Ingrese el indice de la tarea a editar"));
-            nombre = prompt("Ingrese el nuevo nombre de la tarea");
-            editarTarea(index, nombre);
-            break;
-        case 4:
-            index = parseInt(prompt("Ingrese el indice de la tarea a eliminar"));
-            eliminarTarea(index);
-            break;
-        default:
-            break;
+let opcion = prompt("1. Agregar tarea\n2. Mostrar lista\n3. Editar tarea\n4. Eliminar tarea\n0. Terminar con el bucle");
+
+while (opcion !== "0") {
+    if (opcion.trim() === "" || isNaN(opcion) || parseInt(opcion) < 0 || parseInt(opcion) > 4) {
+        alert("Opción no válida. Por favor, ingrese una opción válida.");
+    } else {
+        switch (parseInt(opcion)) {
+            case 1:
+                nombre = prompt("Ingrese el nombre de la tarea");
+                if (nombre.trim() !== "" && !isNaN(nombre)) {
+                    agregarTareas(nombre);
+                } else {
+                    alert("El nombre de la tarea no puede estar vacío ni ser un número");
+                }
+                break;
+            case 2:
+                if (tareas.length > 0) {
+                    listarTareas();
+                } else {
+                    alert("No hay tareas para mostrar.");
+                }
+                break;
+            case 3:
+                if (tareas.length > 0) {
+                    indice = parseInt(prompt("Ingrese el índice de la tarea a editar"));
+                    if (!isNaN(indice) && indice >= 0 && indice < tareas.length) {
+                        nombre = prompt("Ingrese el nuevo nombre de la tarea");
+                        if (nombre.trim() !== "" && !isNaN(nombre)) {
+                            editarTarea(tareas[indice], nombre);
+                        } else {
+                            alert("El nombre de la tarea no puede estar vacío ni ser un número");
+                        }
+                    } else {
+                        alert("Índice de tarea inválido");
+                    }
+                } else {
+                    alert("No hay tareas para editar.");
+                }
+                break;
+            case 4:
+                if (tareas.length > 0) {
+                    nombre = prompt("Ingrese el nombre exacto de la tarea a eliminar");
+                    if (nombre.trim() !== "" && !isNaN(nombre)) {
+                        eliminarTarea(nombre);
+                    } else {
+                        alert("El nombre de la tarea no puede estar vacío ni ser un número");
+                    }
+                } else {
+                    alert("No hay tareas para eliminar.");
+                }
+                break;
+            default:
+                break;
+        }
     }
-    opcion = parseInt(prompt("1. Agregar tarea\n 2.Mostrar lista \n 3. Editar tarea \n 4. Eliminar tarea \n 0. Terminar con el bucle"));
 
+    opcion = prompt("1. Agregar tarea\n2. Mostrar lista\n3. Editar tarea\n4. Eliminar tarea\n0. Terminar con el bucle");
 }
-
-
