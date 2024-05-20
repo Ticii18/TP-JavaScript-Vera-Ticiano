@@ -38,6 +38,7 @@ function editarTarea(nombre, nuevoNombre) {
 
 
 
+
 function eliminarTarea(nombre) {
     const indice = tareas.indexOf(nombre);
     if (indice !== -1) {
@@ -58,7 +59,7 @@ while (opcion !== "0") {
         switch (parseInt(opcion)) {
             case 1:
                 nombre = prompt("Ingrese el nombre de la tarea");
-                if (regex.test(nombre) && isNaN(nombre)) {
+                if (nombre.trim() && isNaN(nombre)) {
                     agregarTareas(nombre);
                 } else {
                     alert("El nombre de la tarea no puede estar vacío ni ser un número");
